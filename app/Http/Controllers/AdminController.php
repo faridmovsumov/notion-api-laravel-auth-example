@@ -7,7 +7,8 @@ use GuzzleHttp\RequestOptions;
 
 class AdminController extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
         $accessToken = session()->get('accessToken');
 
         $baseUrl = "https://api.notion.com/v1/";
@@ -23,7 +24,7 @@ class AdminController extends Controller
 
         $response = $client->post($path, [
             RequestOptions::JSON => [
-                'query' => 'Calendar x',
+                'query' => 'Notion',
             ],
         ]);
 
