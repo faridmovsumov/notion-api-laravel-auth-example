@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 class AdminController extends Controller
 {
     public function dashboard(){
         $accessToken = session()->get('accessToken');
+
         $baseUrl = "https://api.notion.com/v1/";
-        $accessTokenPath = "search";
+        $path = "search";
         $client = new Client([
             'base_uri' => $baseUrl,
             'headers' => [
                 'Authorization' => "Bearer $accessToken",
                 'Content-Type' => 'application/json',
+                'Notion-Version' => '2021-05-13'
             ]
         ]);
 
-        $response = $client->post($accessTokenPath, [
-            'form_params' => [
-                'direction' => 'ascending',
-                'timestamp' => 'last_edited_time',
-                'property' => 'page'
+        $response = $client->post($path, [
+            RequestOptions::JSON => [
+                'query' => 'Calendar x',
             ],
         ]);
 
